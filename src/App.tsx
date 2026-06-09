@@ -14,7 +14,7 @@ const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const NAV_LINKS = [
   { label: '个人简介', href: '#about' },
-  { label: '我的页面', href: '#other-pages' },
+  { label: '个人页面', href: '#other-pages' },
   { label: '联系我', href: '#contact' },
 ] as const;
 
@@ -35,64 +35,54 @@ const ABOUT_POINTS = [
 
 const OTHER_PAGES = [
   {
-    id: 'notes',
+    id: 'github',
+    title: 'GitHub',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+      </svg>
+    ),
+    href: 'https://github.com/SilentFall0814',
+  },
+  {
+    id: 'blog',
     title: '个人博客',
-    category: 'Web项目',
-    description: '比这个网页更全面的个人页面，虽然我觉得它暂时没啥用（这个项目已经停滞了近2个月...）',
-    highlights: ['个人博客', '记录', '文章'],
-    detailTitle: '个人博客',
-    detailText:
-      '这个博客就是分享一些技术讨论、技术分享、日常琐事、日记等等的地方',
-    detailCards: [
-      { label: '这个博客的作用', value: '技术分享、日常记录' },
-      { label: '更新频率', value: '暂时停更' },
-      { label: '页面目标', value: '记录想法与个人内容沉淀' },
-    ],
-    actionLabel: '进入博客',
-    href: 'https://blog.repea.top/',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+        <path d="M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z" />
+        <path d="M8 8h8M8 12h5" strokeLinecap="round" />
+      </svg>
+    ),
+    href: 'https://LJB666.xyz',
   },
   {
-    id: 'lab',
-    title: 'StudyTrack',
-    category: '软件项目',
-    description: '一款面向学生的 Android 成绩管理与分析应用。',
-    highlights: ['成绩记录', '成绩分析', '实用工具'],
-    detailTitle: 'StudyTrack',
-    detailText:
-      '这是一个面向学生的 Android 成绩管理与分析应用，帮助学生记录和分析自己的学习成绩。',
-    detailCards: [
-      { label: '这个项目的作用', value: '记录成绩、查看成绩变化' },
-      { label: '适合人群', value: '需要整理和分析成绩的学生' },
-      { label: '项目目标', value: '做一个真正能帮到学生的实用工具' },
-    ],
-    actionLabel: '进入GitHub',
-    href: 'https://github.com/wznb666-0814/StudyTrack',
+    id: 'bilibili',
+    title: '哔哩哔哩',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+        <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 01-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 01.16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906L17.813 4.653zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773H5.333zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z" />
+      </svg>
+    ),
+    href: 'https://space.bilibili.com/3493079350774423',
   },
   {
-    id: 'daily',
-    title: '抽象页面',
-    category: '啦啦啦',
-    description: '因为暂时我的项目就这么多，也实在没啥可以分享的了',
-    highlights: ['汪汪汪', '喵喵喵', '嘎嘎嘎'],
-    detailTitle: '抽象页面',
-    detailText:
-      '咕咕嘎嘎咕咕嘎嘎咕咕嘎嘎咕咕嘎嘎咕咕嘎嘎咕咕嘎嘎咕咕嘎嘎咕咕嘎嘎咕咕嘎嘎咕咕嘎嘎',
-    detailCards: [
-      { label: '这个页面的作用', value: '放一些抽象内容和随手想法' },
-      { label: '当前状态', value: '纯娱乐，想到什么写什么' },
-      { label: '页面目标', value: '让页面别太严肃，保留一点随意感' },
-    ],
-    actionLabel: '回到我的页面',
-    href: '#other-pages',
+    id: 'douyin',
+    title: '抖音',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13a8.28 8.28 0 005.58 2.15V11.7a4.83 4.83 0 01-3.77-1.63V6.69h3.77z" />
+      </svg>
+    ),
+    href: 'https://www.douyin.com/user/MS4wLjABAAAA7aQIXbw_TC2NVqsX2amf0oxu7f5J-sTd9cu4_QGK-D9KTGJyPfYZDYBwHHYTpET_?from_tab_name=main',
   },
 ] as const;
 
 const CONTACT_ITEMS = [
   {
     label: '163网易邮箱',
-    value: 'liangjunboljb@163.com',
+    value: 'LJB110814@163.com',
     description: '你有什么想和我单独说的呢？欢迎投稿！',
-    href: 'mailto:liangjunboljb@163.com',
+    href: 'mailto:LJB110814@163.com',
   },
   {
     label: 'QQ邮箱',
@@ -102,7 +92,6 @@ const CONTACT_ITEMS = [
   },
 ] as const;
 
-type OtherPageId = (typeof OTHER_PAGES)[number]['id'];
 
 type PointerState = {
   x: number;
@@ -246,18 +235,36 @@ function DotGridCanvas({ pointer, scrollProgress }: { pointer: PointerState; scr
 
       context.clearRect(0, 0, width, height);
 
+      // 按透明度分桶，减少 fillStyle 切换次数
+      const buckets = new Map<number, Array<[number, number, number]>>();
+
       for (let x = -spacing; x <= width + spacing; x += spacing) {
         for (let y = -spacing; y <= height + spacing; y += spacing) {
           const px = x + driftX * ((x / width) * 0.4 + 0.8);
           const py = y + driftY * ((y / height) * 0.2 + 0.8);
           const wave = Math.sin((x + y) * 0.018 + time * 0.001) * 0.32;
           const radius = 0.95 + wave * 0.2 + currentScroll * 0.28;
-          const alpha = 0.28 + pulse * 0.2 + wave * 0.08;
+          const alpha = Math.max(0.08, 0.28 + pulse * 0.2 + wave * 0.08);
+          // 将 alpha 量化到 0.02 精度以减少桶数
+          const key = Math.round(alpha * 50);
+          let bucket = buckets.get(key);
+          if (!bucket) {
+            bucket = [];
+            buckets.set(key, bucket);
+          }
+          bucket.push([px, py, radius]);
+        }
+      }
 
-          context.beginPath();
-          context.fillStyle = `rgba(185, 185, 185, ${Math.max(0.08, alpha)})`;
-          context.arc(px, py, radius, 0, Math.PI * 2);
-          context.fill();
+      // 按桶批量绘制
+      for (const [key, points] of buckets) {
+        const alpha = key / 50;
+        context.fillStyle = `rgba(185,185,185,${alpha})`;
+        for (let i = 0; i < points.length; i++) {
+          const [px, py, r] = points[i];
+          // 用 fillRect 替代 arc，小点视觉差异极小但性能更好
+          const d = r * 2;
+          context.fillRect(px - r, py - r, d, d);
         }
       }
 
@@ -405,7 +412,7 @@ function Navbar({
           }}
         />
         <div className="relative z-10 text-[11px] font-black tracking-[0.22em] text-ink sm:text-sm sm:tracking-[0.28em]">
-          失败总是贯穿人生
+          SilentFall
         </div>
         <nav className="relative z-10 flex w-full items-center gap-2 overflow-x-auto pb-1 text-[12px] font-medium text-ink/80 md:w-auto md:justify-end md:gap-8 md:overflow-visible md:pb-0 md:text-[13px]">
           {NAV_LINKS.map((item) => (
@@ -482,26 +489,28 @@ function SignatureLetters({
   springY: MotionValue<number>;
 }) {
   const letters = [
-    { char: '失', offsetX: [-18, 12], offsetY: [-10, 8], rotate: [-6.8, -3.2], delay: 0.5 },
-    { char: '败', offsetX: [-12, 9], offsetY: [-8, 7], rotate: [-6.1, -3.6], delay: 0.55 },
-    { char: '总', offsetX: [-8, 7], offsetY: [-7, 6], rotate: [-5.7, -4], delay: 0.6 },
-    { char: '是', offsetX: [-4, 5], offsetY: [-5, 5], rotate: [-5.2, -4.3], delay: 0.65 },
-    { char: '贯', offsetX: [2, -4], offsetY: [4, -5], rotate: [-4.8, -4.9], delay: 0.7 },
-    { char: '穿', offsetX: [6, -7], offsetY: [5, -6], rotate: [-4.4, -5.2], delay: 0.75 },
-    { char: '人', offsetX: [10, -9], offsetY: [7, -7], rotate: [-4, -5.8], delay: 0.8 },
-    { char: '生', offsetX: [14, -12], offsetY: [8, -8], rotate: [-3.6, -6.4], delay: 0.85 },
+    { char: 'S', offsetX: [-18, 12], offsetY: [-10, 8], rotate: [-6.8, -3.2], delay: 0.5 },
+    { char: 'i', offsetX: [-12, 9], offsetY: [-8, 7], rotate: [-6.1, -3.6], delay: 0.55 },
+    { char: 'l', offsetX: [-4, 5], offsetY: [-5, 5], rotate: [-5.2, -4.3], delay: 0.65 },
+    { char: 'e', offsetX: [6, -7], offsetY: [5, -6], rotate: [-4.4, -5.2], delay: 0.75 },
+    { char: 'n', offsetX: [14, -12], offsetY: [8, -8], rotate: [-3.6, -6.4], delay: 0.85 },
+    { char: 't', offsetX: [14, -12], offsetY: [8, -8], rotate: [-3.6, -6.4], delay: 0.95 },
+    { char: 'F', offsetX: [14, -12], offsetY: [8, -8], rotate: [-3.6, -6.4], delay: 1.05 },
+    { char: 'a', offsetX: [14, -12], offsetY: [8, -8], rotate: [-3.6, -6.4], delay: 1.15 },
+    { char: 'l', offsetX: [14, -12], offsetY: [8, -8], rotate: [-3.6, -6.4], delay: 1.25 },
+    { char: 'l', offsetX: [14, -12], offsetY: [8, -8], rotate: [-3.6, -6.4], delay: 1.35 },
   ] as const;
 
   return (
     <motion.span
-      className="inline-flex origin-center cursor-default items-end gap-[0.01em] sm:gap-[0.02em] md:gap-[0.03em]"
+      className="inline-flex origin-center cursor-default items-end gap-[0.05em] sm:gap-[0.08em]"
       whileHover="hover"
       initial="initial"
       animate="enter"
     >
-      {letters.map((letter) => (
+      {letters.map((letter, idx) => (
         <LeoLetter
-          key={letter.char}
+          key={`${letter.char}-${idx}`}
           char={letter.char}
           springX={springX}
           springY={springY}
@@ -509,11 +518,151 @@ function SignatureLetters({
           offsetY={letter.offsetY}
           rotateRange={letter.rotate}
           delay={letter.delay}
-          className="inline-block text-[clamp(1.9rem,12vw,3.8rem)] font-light italic tracking-[-0.08em] text-black sm:text-[clamp(1.8rem,4.2vw,3.8rem)] sm:tracking-[-0.12em]"
+          className="inline-block text-[clamp(2.5rem,15vw,5rem)] font-light italic tracking-[-0.05em] text-black sm:text-[clamp(2.2rem,5vw,5rem)]"
         />
       ))}
     </motion.span>
   );
+}
+
+// ── 透视跟随动画组件 ──────────────────────────────────────────────
+// 灵感来自小米 MIMO 官网，双层文字矩阵 + 鼠标跟随 clip-path 遮罩。
+// 底层：浅色水印 + 中文标题；上层：黑色背景 + 白色水印 + 英文标题。
+// 鼠标移入时以圆形/椭圆遮罩显示上层内容，快速移动时椭圆拉伸跟随。
+
+const TRAIL_COUNT = 6;
+const CIRCLE_RADIUS = 220;
+const POLYGON_SEGMENTS = 24;
+
+function usePerspectiveTrail() {
+  const trailRef = useRef({
+    targetX: -300,
+    targetY: -300,
+    trailPoints: Array.from({ length: TRAIL_COUNT }, () => ({ x: -300, y: -300 })),
+    animationId: 0,
+    isInside: false,
+  });
+  const clipPathRef = useRef('circle(0px at -300px -300px)');
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // 检测触摸设备
+  useEffect(() => {
+    setIsTouchDevice(
+      window.matchMedia('(hover: none), (pointer: coarse)').matches ||
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0,
+    );
+  }, []);
+
+  // 动画循环
+  const animate = useCallback(() => {
+    const trail = trailRef.current;
+
+    for (let t = 0; t < TRAIL_COUNT; t++) {
+      const prevX = t === 0 ? trail.targetX : trail.trailPoints[t - 1].x;
+      const prevY = t === 0 ? trail.targetY : trail.trailPoints[t - 1].y;
+      const damping = 0.7 - 0.04 * t;
+      trail.trailPoints[t].x += (prevX - trail.trailPoints[t].x) * damping;
+      trail.trailPoints[t].y += (prevY - trail.trailPoints[t].y) * damping;
+    }
+
+    const head = trail.trailPoints[0];
+    const tail = trail.trailPoints[5];
+    const diffX = head.x - tail.x;
+    const diffY = head.y - tail.y;
+    const distSq = diffX * diffX + diffY * diffY;
+
+    let path: string;
+    if (distSq < 100) {
+      // 距离小于10px时用圆形
+      path = `circle(${CIRCLE_RADIUS}px at ${head.x}px ${head.y}px)`;
+    } else {
+      const angle = Math.atan2(diffY, diffX);
+      const totalPoints = (POLYGON_SEGMENTS + 1) * 2;
+      const parts = new Array<string>(totalPoints);
+      let idx = 0;
+      for (let i = 0; i <= POLYGON_SEGMENTS; i++) {
+        const theta = angle - Math.PI / 2 + (Math.PI * i) / POLYGON_SEGMENTS;
+        parts[idx++] = `${head.x + CIRCLE_RADIUS * Math.cos(theta)}px ${head.y + CIRCLE_RADIUS * Math.sin(theta)}px`;
+      }
+      for (let i = 0; i <= POLYGON_SEGMENTS; i++) {
+        const theta = angle + Math.PI / 2 + (Math.PI * i) / POLYGON_SEGMENTS;
+        parts[idx++] = `${tail.x + CIRCLE_RADIUS * Math.cos(theta)}px ${tail.y + CIRCLE_RADIUS * Math.sin(theta)}px`;
+      }
+      path = `polygon(${parts.join(', ')})`;
+    }
+
+    clipPathRef.current = path;
+    if (overlayRef.current) {
+      overlayRef.current.style.clipPath = path;
+    }
+
+    const lastPoint = trail.trailPoints[TRAIL_COUNT - 1];
+    if (
+      Math.abs(trail.targetX - lastPoint.x) > 2 ||
+      Math.abs(trail.targetY - lastPoint.y) > 2 ||
+      trail.isInside
+    ) {
+      trail.animationId = requestAnimationFrame(animate);
+    } else {
+      trail.animationId = 0;
+    }
+  }, []);
+
+  const onMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (isTouchDevice) return;
+    containerRef.current = e.currentTarget;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const trail = trailRef.current;
+    trail.targetX = x;
+    trail.targetY = y;
+    trail.isInside = true;
+    for (let i = 0; i < TRAIL_COUNT; i++) {
+      trail.trailPoints[i] = { x, y };
+    }
+    if (!trail.animationId) {
+      trail.animationId = requestAnimationFrame(animate);
+    }
+  }, [isTouchDevice, animate]);
+
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (isTouchDevice) return;
+    // 每次都获取最新 rect，滚动后位置会变化
+    const rect = (containerRef.current ?? e.currentTarget).getBoundingClientRect();
+    trailRef.current.targetX = e.clientX - rect.left;
+    trailRef.current.targetY = e.clientY - rect.top;
+    const trail = trailRef.current;
+    if (!trail.animationId) {
+      trail.animationId = requestAnimationFrame(animate);
+    }
+  }, [isTouchDevice, animate]);
+
+  const onMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (isTouchDevice) return;
+    const trail = trailRef.current;
+    trail.isInside = false;
+    const rect = e.currentTarget.getBoundingClientRect();
+    containerRef.current = null;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    let targetX = x;
+    let targetY = y;
+    if (x <= 0) targetX = -400;
+    else if (x >= rect.width) targetX = rect.width + 400;
+    if (y <= 0) targetY = -400;
+    else if (y >= rect.height) targetY = rect.height + 400;
+    trail.targetX = targetX;
+    trail.targetY = targetY;
+    if (!trail.animationId) {
+      trail.animationId = requestAnimationFrame(animate);
+    }
+  }, [isTouchDevice, animate]);
+
+  return { overlayRef, onMouseEnter, onMouseMove, onMouseLeave, isTouchDevice };
 }
 
 function SectionHeading({
@@ -540,6 +689,171 @@ function SectionHeading({
   );
 }
 
+// ── 首屏透视跟随 Hero 区域 ──────────────────────────────────────
+function PerspectiveHeroSection({
+  shouldReduceMotion,
+  pointer,
+  scrollProgress,
+  heroY,
+  heroScale,
+  titleX,
+  titleY,
+  heroRotateX,
+  heroRotateY,
+  eyebrowX,
+  eyebrowY,
+  helloX,
+  helloY,
+  helloShadow,
+  subtitleX,
+  subtitleY,
+  springX,
+  springY,
+}: {
+  shouldReduceMotion: boolean;
+  pointer: PointerState;
+  scrollProgress: number;
+  heroY: MotionValue<number>;
+  heroScale: MotionValue<number>;
+  titleX: MotionValue<number>;
+  titleY: MotionValue<number>;
+  heroRotateX: MotionValue<number>;
+  heroRotateY: MotionValue<number>;
+  eyebrowX: MotionValue<number>;
+  eyebrowY: MotionValue<number>;
+  helloX: MotionValue<number>;
+  helloY: MotionValue<number>;
+  helloShadow: MotionValue<string>;
+  subtitleX: MotionValue<number>;
+  subtitleY: MotionValue<number>;
+  springX: MotionValue<number>;
+  springY: MotionValue<number>;
+}) {
+  const { overlayRef, onMouseEnter, onMouseMove, onMouseLeave, isTouchDevice } = usePerspectiveTrail();
+
+  return (
+    <section
+      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-4 pt-24 sm:px-6 md:min-h-screen"
+      onMouseEnter={onMouseEnter}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
+      {/* 背景渐变 */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(245,245,243,0.96))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.65),rgba(245,245,243,0.92)_58%,rgba(237,237,234,1))]" />
+
+      {/* 底层：点阵画布 */}
+      {!shouldReduceMotion ? <DotGridCanvas pointer={pointer} scrollProgress={scrollProgress} /> : null}
+
+      {/* 底层中文标题 */}
+      <motion.div
+        className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-center justify-center py-8 text-center sm:py-10"
+        style={{
+          y: heroY,
+          scale: heroScale,
+        }}
+      >
+        <motion.div
+          className="flex flex-col items-center justify-center"
+          style={{
+            x: titleX,
+            y: titleY,
+            rotateX: heroRotateX,
+            rotateY: heroRotateY,
+            transformPerspective: 1400,
+            transformStyle: 'preserve-3d',
+          }}
+        >
+          <motion.p
+            className="mb-4 text-[11px] font-semibold uppercase tracking-[0.42em] text-black/35 sm:mb-5 sm:text-[12px] sm:tracking-[0.65em] md:text-[13px]"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 0.8, ease: EASE }}
+            style={{ x: eyebrowX, y: eyebrowY }}
+          >
+            欢迎来到我的个人主页
+          </motion.p>
+
+          <div className="flex flex-col items-center justify-center gap-3 text-center leading-none sm:flex-row sm:flex-wrap sm:items-end sm:gap-x-4">
+            <motion.span
+              className="text-[clamp(2.6rem,16vw,8.8rem)] font-black uppercase tracking-[-0.06em] text-black sm:text-[clamp(3.4rem,10vw,8.8rem)] sm:tracking-[-0.08em]"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8, ease: EASE }}
+              style={{ x: helloX, y: helloY, textShadow: helloShadow, transform: 'translateZ(24px)' }}
+            >
+              HELLO,I&apos;M
+            </motion.span>
+
+            <SignatureLetters springX={springX} springY={springY} />
+          </div>
+
+          <motion.p
+            className="mt-7 max-w-[22rem] text-center text-[11px] leading-6 tracking-[0.22em] text-[#888888] sm:mt-8 sm:max-w-none sm:text-[12px] sm:tracking-[0.35em] md:text-[14px]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.1, duration: 0.75, ease: EASE }}
+            style={{ x: subtitleX, y: subtitleY }}
+          >
+            SilentFall | 14岁 | 中国-北京
+          </motion.p>
+        </motion.div>
+      </motion.div>
+
+      {/* 上层：黑色背景 + 英文标题，通过 clip-path 遮罩显示 */}
+      <div
+        ref={overlayRef}
+        className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-black"
+        style={{ clipPath: 'circle(0px at -300px -300px)', willChange: 'clip-path' }}
+      >
+        <motion.div
+          className="relative z-10 text-center"
+          style={{
+            x: titleX,
+            y: titleY,
+            rotateX: heroRotateX,
+            rotateY: heroRotateY,
+            transformPerspective: 1400,
+            transformStyle: 'preserve-3d',
+          }}
+        >
+          <motion.p
+            className="mb-4 text-[11px] font-semibold uppercase tracking-[0.42em] text-white/40 sm:mb-5 sm:text-[12px] sm:tracking-[0.65em] md:text-[13px]"
+            style={{ x: eyebrowX, y: eyebrowY }}
+          >
+            WELCOME TO MY HOMEPAGE
+          </motion.p>
+          <motion.h1
+            className="text-[clamp(2.6rem,16vw,8.8rem)] font-black uppercase tracking-[-0.06em] text-white sm:text-[clamp(3.4rem,10vw,8.8rem)] sm:tracking-[-0.08em]"
+            style={{ x: helloX, y: helloY, transform: 'translateZ(24px)' }}
+          >
+            HELLO, I&apos;M
+          </motion.h1>
+          <motion.h1
+            className="mt-2 text-[clamp(2.5rem,15vw,5rem)] font-light italic tracking-[-0.05em] text-white sm:text-[clamp(2.2rem,5vw,5rem)]"
+            style={{ x: helloX, y: helloY }}
+          >
+            SilentFall
+          </motion.h1>
+          <motion.p
+            className="mt-7 text-[11px] tracking-[0.22em] text-white/50 sm:text-[12px] sm:tracking-[0.35em] md:text-[14px]"
+            style={{ x: subtitleX, y: subtitleY }}
+          >
+            SilentFall | 14 | Beijing, China
+          </motion.p>
+        </motion.div>
+      </div>
+
+      {/* 触摸设备提示 */}
+      {isTouchDevice ? null : (
+        <div className="absolute bottom-8 left-1/2 z-30 -translate-x-1/2 text-[10px] tracking-[0.3em] text-black/20 sm:text-[11px]">
+          移动鼠标探索
+        </div>
+      )}
+    </section>
+  );
+}
+
 function isInternalHashLink(href: string) {
   return href.startsWith('#');
 }
@@ -552,7 +866,7 @@ function AboutSection() {
       <div className="relative mx-auto max-w-[1200px]">
         <SectionHeading
           eyebrow="个人简介"
-          title="你好！我是失败总是贯穿人生"
+          title="你好！我是SilentFall"
           description="我是一名学生，一个试图把脑子里的奇怪想法变成软件的人..."
         />
 
@@ -596,94 +910,30 @@ function AboutSection() {
   );
 }
 
-function OtherPagesSection({
-  activePageId,
-  onSelect,
-  onNavigate,
-}: {
-  activePageId: OtherPageId;
-  onSelect: (id: OtherPageId) => void;
-  onNavigate: (href: string) => void;
-}) {
-  const activePage = useMemo(
-    () => OTHER_PAGES.find((item) => item.id === activePageId) ?? OTHER_PAGES[0],
-    [activePageId],
-  );
-
+function OtherPagesSection() {
   return (
     <section id="other-pages" className="relative px-4 py-20 sm:px-6 md:py-32">
-      <div className="mx-auto max-w-[1200px]">
-        <SectionHeading
-          eyebrow="我的一些页面"
-          title="我的一些页面"
-          description="这里放了一些我做过或者想保留下来的页面和项目，可以随便点开看看。"
-        />
+      <div className="mx-auto max-w-[800px]">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-[11px] tracking-[0.28em] text-black/35 sm:text-xs sm:tracking-[0.45em]">个人页面</p>
+          <h2 className="mt-4 text-[1.9rem] font-semibold tracking-[-0.05em] text-black sm:mt-5 sm:text-3xl md:text-5xl">
+            我的个人页面
+          </h2>
+        </div>
 
-        <div className="mt-12 grid gap-5 sm:mt-14 sm:gap-6 lg:grid-cols-[0.92fr_1.08fr]">
-          <div className="grid gap-4">
-            {OTHER_PAGES.map((page) => {
-              const isActive = page.id === activePage.id;
-
-              return (
-                <button
-                  key={page.id}
-                  type="button"
-                  onClick={() => onSelect(page.id)}
-                  className={`rounded-[1.5rem] border p-5 text-left transition duration-300 ease-expo sm:rounded-[1.75rem] sm:p-6 ${
-                    isActive
-                      ? 'border-black/20 bg-white shadow-soft'
-                      : 'border-black/8 bg-black/[0.03] hover:border-black/14 hover:bg-white/60'
-                  }`}
-                >
-                  <p className="text-xs tracking-[0.28em] text-black/35">{page.category}</p>
-                  <h3 className="mt-3 text-xl font-semibold tracking-[-0.04em] text-black sm:text-2xl">{page.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-black/58">{page.description}</p>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="rounded-[1.75rem] border border-black/8 bg-white/75 p-6 shadow-soft backdrop-blur-xs sm:p-8 md:rounded-[2rem] md:p-10">
-            <p className="text-sm font-semibold tracking-[0.3em] text-black/30">{activePage.category}</p>
-            <h3 className="mt-5 text-[1.9rem] font-semibold tracking-[-0.05em] text-black sm:text-3xl md:text-4xl">
-              {activePage.detailTitle}
-            </h3>
-            <p className="mt-6 text-sm leading-8 text-black/60 md:text-base">{activePage.detailText}</p>
-
-            <div className="mt-8 flex flex-wrap gap-2.5 sm:gap-3">
-              {activePage.highlights.map((highlight) => (
-                <span key={highlight} className="rounded-full border border-black/10 px-4 py-2 text-sm text-black/58">
-                  {highlight}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-8 rounded-[1.5rem] bg-black text-white sm:mt-10">
-              <div className="grid gap-3 p-4 sm:gap-1 sm:p-6 md:grid-cols-3">
-                {activePage.detailCards.map((item) => (
-                  <div key={item.label} className="rounded-[1.2rem] bg-white/8 p-4 sm:p-5">
-                    <p className="text-xs tracking-[0.24em] text-white/55">{item.label}</p>
-                    <p className="mt-3 text-sm leading-7 text-white/82">{item.value}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-3 sm:mt-14 sm:gap-4">
+          {OTHER_PAGES.map((page) => (
             <a
-              href={activePage.href}
-              onClick={(event) => {
-                if (!isInternalHashLink(activePage.href)) {
-                  return;
-                }
-
-                event.preventDefault();
-                onNavigate(activePage.href);
-              }}
-              className="mt-8 inline-flex w-full items-center justify-center rounded-full border border-black/12 px-5 py-3 text-sm text-black transition duration-300 ease-expo hover:border-black/22 hover:bg-black/5 sm:w-auto"
+              key={page.id}
+              href={page.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 rounded-xl border border-black/10 bg-black/[0.03] px-5 py-3 text-sm font-medium text-black/70 transition duration-300 ease-expo hover:border-black/20 hover:bg-white hover:text-black sm:px-6 sm:py-3.5"
             >
-              {activePage.actionLabel}
+              {page.icon}
+              <span>{page.title}</span>
             </a>
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -734,7 +984,6 @@ export default function App() {
   const [pointer, setPointer] = useState<PointerState>({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [heroRange, setHeroRange] = useState(1080);
-  const [activePageId, setActivePageId] = useState<OtherPageId>(OTHER_PAGES[0].id);
   const [copiedContact, setCopiedContact] = useState<string | null>(null);
   const { isCompactScreen, isCoarsePointer, prefersReducedMotion } = useViewportProfile();
   const shouldReduceMotion = isCompactScreen || isCoarsePointer || prefersReducedMotion;
@@ -908,82 +1157,29 @@ export default function App() {
       <Navbar onNavigate={handleNavigate} />
 
       <main className="relative">
-        <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-4 pt-24 sm:px-6 md:min-h-screen">
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(245,245,243,0.96))]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.65),rgba(245,245,243,0.92)_58%,rgba(237,237,234,1))]" />
+        <PerspectiveHeroSection
+          shouldReduceMotion={shouldReduceMotion}
+          pointer={pointer}
+          scrollProgress={scrollProgress}
+          heroY={heroY}
+          heroScale={heroScale}
+          titleX={titleX}
+          titleY={titleY}
+          heroRotateX={heroRotateX}
+          heroRotateY={heroRotateY}
+          eyebrowX={eyebrowX}
+          eyebrowY={eyebrowY}
+          helloX={helloX}
+          helloY={helloY}
+          helloShadow={helloShadow}
+          subtitleX={subtitleX}
+          subtitleY={subtitleY}
+          springX={springX}
+          springY={springY}
+        />
 
-          {!shouldReduceMotion ? <DotGridCanvas pointer={pointer} scrollProgress={scrollProgress} /> : null}
-
-          <motion.div
-            className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-center justify-center py-8 text-center sm:py-10"
-            style={{
-              y: heroY,
-              scale: heroScale,
-            }}
-          >
-            <motion.div
-              className="flex flex-col items-center justify-center"
-              style={{
-                x: titleX,
-                y: titleY,
-                rotateX: heroRotateX,
-                rotateY: heroRotateY,
-                transformPerspective: 1400,
-                transformStyle: 'preserve-3d',
-              }}
-            >
-              <motion.p
-                className="mb-4 text-[11px] font-semibold uppercase tracking-[0.42em] text-black/35 sm:mb-5 sm:text-[12px] sm:tracking-[0.65em] md:text-[13px]"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.55, duration: 0.8, ease: EASE }}
-                style={{
-                  x: eyebrowX,
-                  y: eyebrowY,
-                }}
-              >
-                欢迎来到我的个人主页
-              </motion.p>
-
-              <div className="flex flex-col items-center justify-center gap-3 text-center leading-none sm:flex-row sm:flex-wrap sm:items-end sm:gap-x-4">
-                <motion.span
-                  className="text-[clamp(2.6rem,16vw,8.8rem)] font-black uppercase tracking-[-0.06em] text-black sm:text-[clamp(3.4rem,10vw,8.8rem)] sm:tracking-[-0.08em]"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.8, ease: EASE }}
-                  style={{
-                    x: helloX,
-                    y: helloY,
-                    textShadow: helloShadow,
-                    transform: 'translateZ(24px)',
-                  }}
-                >
-                  HELLO,I&apos;M
-                </motion.span>
-
-                <SignatureLetters springX={springX} springY={springY} />
-              </div>
-
-              <motion.p
-                className="mt-7 max-w-[22rem] text-center text-[11px] leading-6 tracking-[0.22em] text-[#888888] sm:mt-8 sm:max-w-none sm:text-[12px] sm:tracking-[0.35em] md:text-[14px]"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.1, duration: 0.75, ease: EASE }}
-                style={{
-                  x: subtitleX,
-                  y: subtitleY,
-                }}
-              >
-                失败总是贯穿人生 | Repea | 14岁 | 中国-北京
-              </motion.p>
-
-            </motion.div>
-
-          </motion.div>
-        </section>
-
+        <OtherPagesSection />
         <AboutSection />
-        <OtherPagesSection activePageId={activePageId} onSelect={setActivePageId} onNavigate={handleNavigate} />
         <ContactSection copiedValue={copiedContact} onCopy={handleCopyContact} />
       </main>
     </div>
