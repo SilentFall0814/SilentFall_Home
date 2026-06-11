@@ -9,88 +9,12 @@ import {
   useTransform,
 } from 'framer-motion';
 import Lenis from 'lenis';
+import { AboutSection } from './components/sections/AboutSection';
+import { ContactSection } from './components/sections/ContactSection';
+import { OtherPagesSection } from './components/sections/OtherPagesSection';
+import { NAV_LINKS } from './constants/site';
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const NAV_LINKS = [
-  { label: '个人简介', href: '#about' },
-  { label: '个人页面', href: '#other-pages' },
-  { label: '联系我', href: '#contact' },
-] as const;
-
-const ABOUT_POINTS = [
-  {
-    title: '日常罢了',
-    description: '除了这些，我也会刷视频、听音乐、偶尔发呆，和大多数人差不多，因为我真的很闲。',
-  },
-  {
-    title: '宅男',
-       description: '一天里大部分时间都在电脑前，但也会偶尔站起来走走，假装自己很健康。',
-  },
-  {
-    title: '人类？？？',
-    description: '有时候会盯着一个界面发呆，然后才意识到已经过去好几分钟。',
-  },
-] as const;
-
-const OTHER_PAGES = [
-  {
-    id: 'github',
-    title: 'GitHub',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-      </svg>
-    ),
-    href: 'https://github.com/SilentFall0814',
-  },
-  {
-    id: 'blog',
-    title: '个人博客',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
-        <path d="M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z" />
-        <path d="M8 8h8M8 12h5" strokeLinecap="round" />
-      </svg>
-    ),
-    href: 'https://LJB666.xyz',
-  },
-  {
-    id: 'bilibili',
-    title: '哔哩哔哩',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-        <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 01-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 01.16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906L17.813 4.653zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773H5.333zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z" />
-      </svg>
-    ),
-    href: 'https://space.bilibili.com/3493079350774423',
-  },
-  {
-    id: 'douyin',
-    title: '抖音',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13a8.28 8.28 0 005.58 2.15V11.7a4.83 4.83 0 01-3.77-1.63V6.69h3.77z" />
-      </svg>
-    ),
-    href: 'https://www.douyin.com/user/MS4wLjABAAAA7aQIXbw_TC2NVqsX2amf0oxu7f5J-sTd9cu4_QGK-D9KTGJyPfYZDYBwHHYTpET_?from_tab_name=main',
-  },
-] as const;
-
-const CONTACT_ITEMS = [
-  {
-    label: '163网易邮箱',
-    value: 'LJB110814@163.com',
-    description: '你有什么想和我单独说的呢？欢迎投稿！',
-    href: 'mailto:LJB110814@163.com',
-  },
-  {
-    label: 'QQ邮箱',
-    value: 'liangjunboljb@qq.com',
-    description: '163网易邮箱未及时回复时可发这里',
-    href: 'mailto:liangjunboljb@qq.com',
-  },
-] as const;
 
 
 type PointerState = {
@@ -854,127 +778,6 @@ function PerspectiveHeroSection({
   );
 }
 
-// 第二屏开始进入正文内容，建立清晰的个人介绍与能力概览。
-function AboutSection() {
-  return (
-    <section id="about" className="relative overflow-hidden px-4 py-20 sm:px-6 md:py-32">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.95),rgba(245,245,243,0.8)_48%,rgba(240,240,238,0.9))]" />
-      <div className="relative mx-auto max-w-[1200px]">
-        <SectionHeading
-          eyebrow="个人简介"
-          title="你好！我是SilentFall"
-          description="我是一名学生，一个试图把脑子里的奇怪想法变成软件的人..."
-        />
-
-        <div className="mt-12 grid gap-5 sm:mt-14 sm:gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-[1.75rem] border border-black/8 bg-white/70 p-6 shadow-soft backdrop-blur-xs sm:p-8 md:rounded-[2rem] md:p-10">
-            <p className="text-sm font-semibold tracking-[0.3em] text-black/30">关于我</p>
-            <h3 className="mt-5 text-[1.75rem] font-semibold tracking-[-0.04em] text-black sm:text-2xl md:text-4xl">
-              一个社恐、宅男、一个有着非常非常多的奇怪想法的人类
-            </h3>
-            <p className="mt-6 text-sm leading-8 text-black/60 md:text-base">
-              平时喜欢待在电脑前折腾点东西，有时候是写点小程序，有时候只是单纯地把桌面整理得更顺眼一点。
-            </p>
-            <p className="mt-6 text-sm leading-8 text-black/60 md:text-base">
-              我对“为什么会这样”这种问题有点执念，比如会突然想做一个网页来介绍自己，然后就真的来做了个网页。
-            </p>
-            <p className="mt-6 text-sm leading-8 text-black/60 md:text-base">
-              我的一些标签：
-            </p>
-            <div className="mt-8 flex flex-wrap gap-2.5 text-sm text-black/60 sm:gap-3">
-              <span className="rounded-full border border-black/10 px-4 py-2">宅男</span>
-              <span className="rounded-full border border-black/10 px-4 py-2">社恐</span>
-              <span className="rounded-full border border-black/10 px-4 py-2">抽象</span>
-              <span className="rounded-full border border-black/10 px-4 py-2">伪人</span>
-            </div>
-          </div>
-
-          <div className="grid gap-4">
-            {ABOUT_POINTS.map((item) => (
-              <article
-                key={item.title}
-                className="rounded-[1.5rem] border border-black/8 bg-black/[0.03] p-5 transition duration-300 ease-expo hover:-translate-y-1 hover:bg-white/70 sm:rounded-[1.75rem] sm:p-6"
-              >
-                <p className="text-sm font-semibold tracking-[0.22em] text-black/35">{item.title}</p>
-                <p className="mt-4 text-sm leading-7 text-black/60">{item.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function OtherPagesSection() {
-  return (
-    <section id="other-pages" className="relative px-4 py-20 sm:px-6 md:py-32">
-      <div className="mx-auto max-w-[800px]">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-[11px] tracking-[0.28em] text-black/35 sm:text-xs sm:tracking-[0.45em]">个人页面</p>
-          <h2 className="mt-4 text-[1.9rem] font-semibold tracking-[-0.05em] text-black sm:mt-5 sm:text-3xl md:text-5xl">
-            我的个人页面
-          </h2>
-        </div>
-
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-3 sm:mt-14 sm:gap-4">
-          {OTHER_PAGES.map((page) => (
-            <a
-              key={page.id}
-              href={page.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2.5 rounded-xl border border-black/10 bg-black/[0.03] px-5 py-3 text-sm font-medium text-black/70 transition duration-300 ease-expo hover:border-black/20 hover:bg-white hover:text-black sm:px-6 sm:py-3.5"
-            >
-              {page.icon}
-              <span>{page.title}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ContactSection({
-  copiedValue,
-  onCopy,
-}: {
-  copiedValue: string | null;
-  onCopy: (value: string) => void;
-}) {
-  return (
-    <section id="contact" className="relative px-4 pb-14 pt-20 sm:px-6 md:pb-24 md:pt-28">
-      <div className="mx-auto max-w-[1200px] rounded-[1.75rem] border border-black/6 bg-white/60 px-5 py-10 shadow-soft backdrop-blur-xs sm:px-8 sm:py-12 md:rounded-[2rem] md:px-10 md:py-16">
-        <SectionHeading
-          eyebrow="联系我"
-          title="这里是主包的邮箱地址哦！"
-          description="你有什么想和我单独说的呢？欢迎投稿！"
-        />
-
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {CONTACT_ITEMS.map((item) => (
-            <article key={item.value} className="rounded-[1.5rem] border border-black/8 bg-black/[0.03] p-5 sm:rounded-[1.75rem] sm:p-6">
-              <p className="text-sm font-semibold tracking-[0.24em] text-black/35">{item.label}</p>
-              <a href={item.href} className="mt-4 block break-all text-base font-semibold text-black transition hover:opacity-75 sm:text-lg">
-                {item.value}
-              </a>
-              <p className="mt-3 text-sm leading-7 text-black/58">{item.description}</p>
-              <button
-                type="button"
-                onClick={() => onCopy(item.value)}
-                className="mt-5 w-full rounded-full border border-black/12 px-4 py-2 text-sm text-black transition duration-300 ease-expo hover:border-black/22 hover:bg-white sm:w-auto"
-              >
-                {copiedValue === item.value ? '已复制邮箱' : '复制邮箱地址'}
-              </button>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function App() {
   const lenisRef = useRef<Lenis | null>(null);
   const [pointer, setPointer] = useState<PointerState>({ x: 0, y: 0 });
@@ -1147,6 +950,11 @@ export default function App() {
     }
   };
 
+  const renderSectionHeading = useCallback(
+    (props: { eyebrow: string; title: string; description?: string }) => <SectionHeading {...props} />,
+    [],
+  );
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-mist text-ink">
       <LiquidGlassDefs />
@@ -1175,8 +983,12 @@ export default function App() {
         />
 
         <OtherPagesSection />
-        <AboutSection />
-        <ContactSection copiedValue={copiedContact} onCopy={handleCopyContact} />
+        <AboutSection renderSectionHeading={renderSectionHeading} />
+        <ContactSection
+          copiedValue={copiedContact}
+          onCopy={handleCopyContact}
+          renderSectionHeading={renderSectionHeading}
+        />
       </main>
     </div>
   );
