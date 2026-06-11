@@ -1,18 +1,10 @@
-@font-face {
-  font-family: 'PingFangSC-Semibold';
-  src: url('./assets/PingFangSC-Semibold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* 使用本地苹方半粗体，确保所有设备显示一致 */
-  font-family: 'PingFangSC-Semibold', sans-serif !important;
+  /* 改为系统字体栈，避免将超大字体文件打进生产包 */
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', sans-serif !important;
   color: #090909;
   background: #f5f5f3;
   font-synthesis: none;
@@ -25,10 +17,21 @@ html {
   scroll-behavior: auto;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   margin: 0;
   min-width: 320px;
-  /* 继承根节点强制锁定的字体 */
+  /* 所有元素统一继承系统字体栈 */
   font-family: inherit !important;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.96), rgba(245, 245, 243, 0.88) 42%),
