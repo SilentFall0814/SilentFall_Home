@@ -8,11 +8,13 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion';
-import Lenis from 'lenis';
 import { AboutSection } from './components/sections/AboutSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { OtherPagesSection } from './components/sections/OtherPagesSection';
 import { NAV_LINKS } from './constants/site';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { useViewportProfile } from './hooks/useViewportProfile';
+import { getAnimationLevel } from './utils/performance';
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -21,57 +23,6 @@ type PointerState = {
   x: number;
   y: number;
 };
-
-function useViewportProfile() {
-  const [profile, setProfile] = useState(() => {
-    if (typeof window === 'undefined') {
-      return {
-        isCompactScreen: false,
-        isCoarsePointer: false,
-        prefersReducedMotion: false,
-      };
-    }
-
-    return {
-      isCompactScreen: window.matchMedia('(max-width: 640px)').matches,
-      isCoarsePointer: window.matchMedia('(pointer: coarse)').matches,
-      prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-    };
-  });
-
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    const compactMedia = window.matchMedia('(max-width: 640px)');
-    const coarseMedia = window.matchMedia('(pointer: coarse)');
-    const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    const updateProfile = () => {
-      setProfile({
-        isCompactScreen: compactMedia.matches,
-        isCoarsePointer: coarseMedia.matches,
-        prefersReducedMotion: motionMedia.matches,
-      });
-    };
-
-    updateProfile();
-    compactMedia.addEventListener('change', updateProfile);
-    coarseMedia.addEventListener('change', updateProfile);
-    motionMedia.addEventListener('change', updateProfile);
-    window.addEventListener('resize', updateProfile);
-
-    return () => {
-      compactMedia.removeEventListener('change', updateProfile);
-      coarseMedia.removeEventListener('change', updateProfile);
-      motionMedia.removeEventListener('change', updateProfile);
-      window.removeEventListener('resize', updateProfile);
-    };
-  }, []);
-
-  return profile;
-}
 
 function mapPointerRange(value: number, output: readonly [number, number]) {
   const progress = (value + 1) / 2;
@@ -779,13 +730,15 @@ function PerspectiveHeroSection({
 }
 
 export default function App() {
-  const lenisRef = useRef<Lenis | null>(null);
   const [pointer, setPointer] = useState<PointerState>({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [heroRange, setHeroRange] = useState(1080);
   const [copiedContact, setCopiedContact] = useState<string | null>(null);
-  const { isCompactScreen, isCoarsePointer, prefersReducedMotion } = useViewportProfile();
-  const shouldReduceMotion = isCompactScreen || isCoarsePointer || prefersReducedMotion;
+  const viewportProfile = useViewportProfile();
+  const { isCompactScreen } = viewportProfile;
+  const animationLevel = getAnimationLevel(viewportProfile);
+  const lenisRef = useSmoothScroll(animationLevel);
+  const shouldReduceMotion = animationLevel === 'lite';
   const { springX, springY } = useParallaxPointer();
   const { scrollYProgress, scrollY } = useScroll();
 
@@ -899,33 +852,6 @@ export default function App() {
       unsubscribe();
     };
   }, [scrollYProgress]);
-
-  useEffect(() => {
-    // 让 Framer Motion 的滚动联动与 Lenis 平滑滚动保持同一节奏。
-    const lenis = new Lenis({
-      duration: 1.15,
-      lerp: 0.09,
-      smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.1,
-    });
-    lenisRef.current = lenis;
-
-    let rafId = 0;
-
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafId = window.requestAnimationFrame(raf);
-    };
-
-    rafId = window.requestAnimationFrame(raf);
-
-    return () => {
-      window.cancelAnimationFrame(rafId);
-      lenisRef.current = null;
-      lenis.destroy();
-    };
-  }, []);
 
   useEffect(() => {
     if (!copiedContact) {
