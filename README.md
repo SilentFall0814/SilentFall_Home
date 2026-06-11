@@ -88,6 +88,12 @@ npm run build
 npm run preview
 ```
 
+## 文档
+
+- 性能优化报告：`docs/performance-report.md`
+- 宝塔部署指南：`docs/宝塔部署博客项目指南.md`
+- 设计规格：`docs/superpowers/specs/2026-06-11-performance-and-bt-deploy-design.md`
+
 ## 许可证
 
 MIT
