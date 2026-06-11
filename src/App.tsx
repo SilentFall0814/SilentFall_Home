@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   motion,
   type MotionValue,
@@ -852,10 +852,6 @@ function PerspectiveHeroSection({
       )}
     </section>
   );
-}
-
-function isInternalHashLink(href: string) {
-  return href.startsWith('#');
 }
 
 // 第二屏开始进入正文内容，建立清晰的个人介绍与能力概览。
