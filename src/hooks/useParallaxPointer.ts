@@ -1,11 +1,19 @@
-import { useEffect } from 'react';
-import { useMotionValue, useSpring } from 'framer-motion';
+import { useEffect } from "react";
+import { useMotionValue, useSpring } from "framer-motion";
 
 export function useParallaxPointer() {
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
-  const springX = useSpring(pointerX, { stiffness: 70, damping: 20, mass: 0.8 });
-  const springY = useSpring(pointerY, { stiffness: 70, damping: 20, mass: 0.8 });
+  const springX = useSpring(pointerX, {
+    stiffness: 70,
+    damping: 20,
+    mass: 0.8,
+  });
+  const springY = useSpring(pointerY, {
+    stiffness: 70,
+    damping: 20,
+    mass: 0.8,
+  });
 
   useEffect(() => {
     const handleMove = (event: MouseEvent) => {
@@ -23,12 +31,12 @@ export function useParallaxPointer() {
       pointerY.set(0);
     };
 
-    window.addEventListener('mousemove', handleMove, { passive: true });
-    window.addEventListener('mouseleave', handleLeave);
+    window.addEventListener("mousemove", handleMove, { passive: true });
+    window.addEventListener("mouseleave", handleLeave);
 
     return () => {
-      window.removeEventListener('mousemove', handleMove);
-      window.removeEventListener('mouseleave', handleLeave);
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mouseleave", handleLeave);
     };
   }, [pointerX, pointerY]);
 

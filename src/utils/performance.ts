@@ -4,22 +4,26 @@ export type ViewportProfile = {
   prefersReducedMotion: boolean;
 };
 
-export type AnimationLevel = 'full' | 'lite';
+export type AnimationLevel = "full" | "lite";
 
 export function getAnimationLevel(profile: ViewportProfile): AnimationLevel {
-  if (profile.isCompactScreen || profile.isCoarsePointer || profile.prefersReducedMotion) {
-    return 'lite';
+  if (
+    profile.isCompactScreen ||
+    profile.isCoarsePointer ||
+    profile.prefersReducedMotion
+  ) {
+    return "lite";
   }
 
-  return 'full';
+  return "full";
 }
 
 export function shouldEnableSmoothScroll(level: AnimationLevel) {
-  return level === 'full';
+  return level === "full";
 }
 
 export function getDotGridConfig(level: AnimationLevel) {
-  if (level === 'full') {
+  if (level === "full") {
     return {
       spacing: 28,
       heightRatio: 1.3,

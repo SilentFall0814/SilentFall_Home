@@ -1,11 +1,19 @@
-import { motion, useMotionTemplate, useScroll, useTransform } from 'framer-motion';
-import { NAV_LINKS } from '../../constants/site';
+import {
+  motion,
+  useMotionTemplate,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 
 type NavbarProps = {
+  links: ReadonlyArray<{
+    label: string;
+    href: string;
+  }>;
   onNavigate: (href: string) => void;
 };
 
-export function Navbar({ onNavigate }: NavbarProps) {
+export function Navbar({ links, onNavigate }: NavbarProps) {
   const { scrollY } = useScroll();
   const backgroundOpacity = useTransform(scrollY, [0, 80], [0.14, 0.24]);
   const borderOpacity = useTransform(scrollY, [0, 80], [0.34, 0.48]);
@@ -32,14 +40,14 @@ export function Navbar({ onNavigate }: NavbarProps) {
           className="pointer-events-none absolute inset-[1px] rounded-full"
           style={{
             background:
-              'linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.16) 24%, rgba(255, 255, 255, 0.07) 58%, rgba(255, 255, 255, 0.04) 100%)',
+              "linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.16) 24%, rgba(255, 255, 255, 0.07) 58%, rgba(255, 255, 255, 0.04) 100%)",
           }}
         />
         <div
           className="pointer-events-none absolute inset-0 rounded-full"
           style={{
             boxShadow:
-              'inset 0 1px 0 rgba(255, 255, 255, 0.98), inset 0 -1px 0 rgba(255, 255, 255, 0.42), inset 0 0 24px rgba(255, 255, 255, 0.08)',
+              "inset 0 1px 0 rgba(255, 255, 255, 0.98), inset 0 -1px 0 rgba(255, 255, 255, 0.42), inset 0 0 24px rgba(255, 255, 255, 0.08)",
           }}
         />
         <motion.div
@@ -52,12 +60,12 @@ export function Navbar({ onNavigate }: NavbarProps) {
           transition={{
             duration: 8.5,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
           style={{
             background:
-              'radial-gradient(circle at center, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.24) 34%, rgba(255, 255, 255, 0.08) 54%, rgba(255, 255, 255, 0) 76%)',
-            filter: 'blur(10px)',
+              "radial-gradient(circle at center, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.24) 34%, rgba(255, 255, 255, 0.08) 54%, rgba(255, 255, 255, 0) 76%)",
+            filter: "blur(10px)",
           }}
         />
         <motion.div
@@ -70,12 +78,12 @@ export function Navbar({ onNavigate }: NavbarProps) {
           transition={{
             duration: 6.8,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
           style={{
             background:
-              'radial-gradient(circle at center, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0) 76%)',
-            filter: 'blur(7px)',
+              "radial-gradient(circle at center, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0) 76%)",
+            filter: "blur(7px)",
           }}
         />
         <motion.div
@@ -88,19 +96,19 @@ export function Navbar({ onNavigate }: NavbarProps) {
           transition={{
             duration: 9.2,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
           style={{
             background:
-              'radial-gradient(circle at center, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.12) 44%, rgba(255, 255, 255, 0) 74%)',
-            filter: 'blur(12px)',
+              "radial-gradient(circle at center, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.12) 44%, rgba(255, 255, 255, 0) 74%)",
+            filter: "blur(12px)",
           }}
         />
         <div className="relative z-10 text-[11px] font-black tracking-[0.22em] text-ink sm:text-sm sm:tracking-[0.28em]">
           SilentFall
         </div>
         <nav className="relative z-10 flex w-full items-center gap-2 overflow-x-auto pb-1 text-[12px] font-medium text-ink/80 md:w-auto md:justify-end md:gap-8 md:overflow-visible md:pb-0 md:text-[13px]">
-          {NAV_LINKS.map((item) => (
+          {links.map((item) => (
             <a
               key={item.href}
               href={item.href}

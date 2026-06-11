@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const TRAIL_COUNT = 6;
 const CIRCLE_RADIUS = 220;
@@ -8,7 +8,10 @@ export function usePerspectiveTrail() {
   const trailRef = useRef({
     targetX: -300,
     targetY: -300,
-    trailPoints: Array.from({ length: TRAIL_COUNT }, () => ({ x: -300, y: -300 })),
+    trailPoints: Array.from({ length: TRAIL_COUNT }, () => ({
+      x: -300,
+      y: -300,
+    })),
     animationId: 0,
     isInside: false,
   });
@@ -18,8 +21,8 @@ export function usePerspectiveTrail() {
 
   useEffect(() => {
     setIsTouchDevice(
-      window.matchMedia('(hover: none), (pointer: coarse)').matches ||
-        'ontouchstart' in window ||
+      window.matchMedia("(hover: none), (pointer: coarse)").matches ||
+        "ontouchstart" in window ||
         navigator.maxTouchPoints > 0,
     );
   }, []);
@@ -28,11 +31,15 @@ export function usePerspectiveTrail() {
     const trail = trailRef.current;
 
     for (let index = 0; index < TRAIL_COUNT; index += 1) {
-      const prevX = index === 0 ? trail.targetX : trail.trailPoints[index - 1].x;
-      const prevY = index === 0 ? trail.targetY : trail.trailPoints[index - 1].y;
+      const prevX =
+        index === 0 ? trail.targetX : trail.trailPoints[index - 1].x;
+      const prevY =
+        index === 0 ? trail.targetY : trail.trailPoints[index - 1].y;
       const damping = 0.7 - 0.04 * index;
-      trail.trailPoints[index].x += (prevX - trail.trailPoints[index].x) * damping;
-      trail.trailPoints[index].y += (prevY - trail.trailPoints[index].y) * damping;
+      trail.trailPoints[index].x +=
+        (prevX - trail.trailPoints[index].x) * damping;
+      trail.trailPoints[index].y +=
+        (prevY - trail.trailPoints[index].y) * damping;
     }
 
     const head = trail.trailPoints[0];
@@ -51,18 +58,22 @@ export function usePerspectiveTrail() {
       let pointIndex = 0;
 
       for (let index = 0; index <= POLYGON_SEGMENTS; index += 1) {
-        const theta = angle - Math.PI / 2 + (Math.PI * index) / POLYGON_SEGMENTS;
-        parts[pointIndex] = `${head.x + CIRCLE_RADIUS * Math.cos(theta)}px ${head.y + CIRCLE_RADIUS * Math.sin(theta)}px`;
+        const theta =
+          angle - Math.PI / 2 + (Math.PI * index) / POLYGON_SEGMENTS;
+        parts[pointIndex] =
+          `${head.x + CIRCLE_RADIUS * Math.cos(theta)}px ${head.y + CIRCLE_RADIUS * Math.sin(theta)}px`;
         pointIndex += 1;
       }
 
       for (let index = 0; index <= POLYGON_SEGMENTS; index += 1) {
-        const theta = angle + Math.PI / 2 + (Math.PI * index) / POLYGON_SEGMENTS;
-        parts[pointIndex] = `${tail.x + CIRCLE_RADIUS * Math.cos(theta)}px ${tail.y + CIRCLE_RADIUS * Math.sin(theta)}px`;
+        const theta =
+          angle + Math.PI / 2 + (Math.PI * index) / POLYGON_SEGMENTS;
+        parts[pointIndex] =
+          `${tail.x + CIRCLE_RADIUS * Math.cos(theta)}px ${tail.y + CIRCLE_RADIUS * Math.sin(theta)}px`;
         pointIndex += 1;
       }
 
-      path = `polygon(${parts.join(', ')})`;
+      path = `polygon(${parts.join(", ")})`;
     }
 
     if (overlayRef.current) {
@@ -114,7 +125,9 @@ export function usePerspectiveTrail() {
         return;
       }
 
-      const rect = (containerRef.current ?? event.currentTarget).getBoundingClientRect();
+      const rect = (
+        containerRef.current ?? event.currentTarget
+      ).getBoundingClientRect();
       trailRef.current.targetX = event.clientX - rect.left;
       trailRef.current.targetY = event.clientY - rect.top;
 

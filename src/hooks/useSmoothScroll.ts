@@ -1,6 +1,9 @@
-import { useEffect, useRef } from 'react';
-import Lenis from 'lenis';
-import { shouldEnableSmoothScroll, type AnimationLevel } from '../utils/performance';
+import { useEffect, useRef } from "react";
+import Lenis from "lenis";
+import {
+  shouldEnableSmoothScroll,
+  type AnimationLevel,
+} from "../utils/performance";
 
 export function useSmoothScroll(level: AnimationLevel) {
   const lenisRef = useRef<Lenis | null>(null);
