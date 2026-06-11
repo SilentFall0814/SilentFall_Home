@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import {
   motion,
   type MotionValue,
@@ -7,281 +7,16 @@ import {
   useTransform,
 } from 'framer-motion';
 import type { AnimationLevel } from '../../utils/performance';
+import { usePerspectiveTrail } from '../../hooks/usePerspectiveTrail';
+import { DotGridCanvas } from './DotGridCanvas';
 import { SignatureLetters } from './SignatureLetters';
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const TRAIL_COUNT = 6;
-const CIRCLE_RADIUS = 220;
-const POLYGON_SEGMENTS = 24;
 
 type PointerState = {
   x: number;
   y: number;
 };
-
-function DotGridCanvas({
-  pointer,
-  scrollProgress,
-}: {
-  pointer: PointerState;
-  scrollProgress: number;
-}) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const pointerRef = useRef(pointer);
-  const scrollRef = useRef(scrollProgress);
-
-  pointerRef.current = pointer;
-  scrollRef.current = scrollProgress;
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) {
-      return;
-    }
-
-    const context = canvas.getContext('2d');
-    if (!context) {
-      return;
-    }
-
-    let animationId = 0;
-    let width = 0;
-    let height = 0;
-    let dpr = 1;
-    const spacing = 28;
-
-    const resize = () => {
-      dpr = window.devicePixelRatio || 1;
-      width = window.innerWidth;
-      height = window.innerHeight * 1.3;
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      context.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-
-    const render = (time: number) => {
-      const currentPointer = pointerRef.current;
-      const currentScroll = scrollRef.current;
-      const driftX = Math.sin(time * 0.00018) * 8 - currentPointer.x * 14;
-      const driftY = Math.cos(time * 0.00015) * 10 - currentPointer.y * 14 + currentScroll * 40;
-      const pulse = 0.72 + Math.sin(time * 0.0011) * 0.08;
-
-      context.clearRect(0, 0, width, height);
-
-      const buckets = new Map<number, Array<[number, number, number]>>();
-
-      for (let x = -spacing; x <= width + spacing; x += spacing) {
-        for (let y = -spacing; y <= height + spacing; y += spacing) {
-          const px = x + driftX * ((x / width) * 0.4 + 0.8);
-          const py = y + driftY * ((y / height) * 0.2 + 0.8);
-          const wave = Math.sin((x + y) * 0.018 + time * 0.001) * 0.32;
-          const radius = 0.95 + wave * 0.2 + currentScroll * 0.28;
-          const alpha = Math.max(0.08, 0.28 + pulse * 0.2 + wave * 0.08);
-          const key = Math.round(alpha * 50);
-
-          let bucket = buckets.get(key);
-          if (!bucket) {
-            bucket = [];
-            buckets.set(key, bucket);
-          }
-
-          bucket.push([px, py, radius]);
-        }
-      }
-
-      for (const [key, points] of buckets) {
-        const alpha = key / 50;
-        context.fillStyle = `rgba(185,185,185,${alpha})`;
-        for (let index = 0; index < points.length; index += 1) {
-          const [px, py, radius] = points[index];
-          const diameter = radius * 2;
-          context.fillRect(px - radius, py - radius, diameter, diameter);
-        }
-      }
-
-      animationId = window.requestAnimationFrame(render);
-    };
-
-    resize();
-    animationId = window.requestAnimationFrame(render);
-    window.addEventListener('resize', resize);
-
-    return () => {
-      window.cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resize);
-    };
-  }, []);
-
-  return (
-    <motion.canvas
-      ref={canvasRef}
-      className="absolute inset-0 h-[130vh] w-full opacity-0"
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.2, ease: EASE }}
-      style={{
-        x: -pointer.x * 16,
-        y: -pointer.y * 12 + scrollProgress * 50,
-      }}
-    />
-  );
-}
-
-function usePerspectiveTrail() {
-  const trailRef = useRef({
-    targetX: -300,
-    targetY: -300,
-    trailPoints: Array.from({ length: TRAIL_COUNT }, () => ({ x: -300, y: -300 })),
-    animationId: 0,
-    isInside: false,
-  });
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-  useEffect(() => {
-    setIsTouchDevice(
-      window.matchMedia('(hover: none), (pointer: coarse)').matches ||
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0,
-    );
-  }, []);
-
-  const animate = useCallback(() => {
-    const trail = trailRef.current;
-
-    for (let index = 0; index < TRAIL_COUNT; index += 1) {
-      const prevX = index === 0 ? trail.targetX : trail.trailPoints[index - 1].x;
-      const prevY = index === 0 ? trail.targetY : trail.trailPoints[index - 1].y;
-      const damping = 0.7 - 0.04 * index;
-      trail.trailPoints[index].x += (prevX - trail.trailPoints[index].x) * damping;
-      trail.trailPoints[index].y += (prevY - trail.trailPoints[index].y) * damping;
-    }
-
-    const head = trail.trailPoints[0];
-    const tail = trail.trailPoints[TRAIL_COUNT - 1];
-    const diffX = head.x - tail.x;
-    const diffY = head.y - tail.y;
-    const distSq = diffX * diffX + diffY * diffY;
-
-    let path: string;
-    if (distSq < 100) {
-      path = `circle(${CIRCLE_RADIUS}px at ${head.x}px ${head.y}px)`;
-    } else {
-      const angle = Math.atan2(diffY, diffX);
-      const totalPoints = (POLYGON_SEGMENTS + 1) * 2;
-      const parts = new Array<string>(totalPoints);
-      let pointIndex = 0;
-
-      for (let index = 0; index <= POLYGON_SEGMENTS; index += 1) {
-        const theta = angle - Math.PI / 2 + (Math.PI * index) / POLYGON_SEGMENTS;
-        parts[pointIndex] = `${head.x + CIRCLE_RADIUS * Math.cos(theta)}px ${head.y + CIRCLE_RADIUS * Math.sin(theta)}px`;
-        pointIndex += 1;
-      }
-
-      for (let index = 0; index <= POLYGON_SEGMENTS; index += 1) {
-        const theta = angle + Math.PI / 2 + (Math.PI * index) / POLYGON_SEGMENTS;
-        parts[pointIndex] = `${tail.x + CIRCLE_RADIUS * Math.cos(theta)}px ${tail.y + CIRCLE_RADIUS * Math.sin(theta)}px`;
-        pointIndex += 1;
-      }
-
-      path = `polygon(${parts.join(', ')})`;
-    }
-
-    if (overlayRef.current) {
-      overlayRef.current.style.clipPath = path;
-    }
-
-    const lastPoint = trail.trailPoints[TRAIL_COUNT - 1];
-    if (
-      Math.abs(trail.targetX - lastPoint.x) > 2 ||
-      Math.abs(trail.targetY - lastPoint.y) > 2 ||
-      trail.isInside
-    ) {
-      trail.animationId = requestAnimationFrame(animate);
-    } else {
-      trail.animationId = 0;
-    }
-  }, []);
-
-  const onMouseEnter = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      if (isTouchDevice) {
-        return;
-      }
-
-      containerRef.current = event.currentTarget;
-      const rect = event.currentTarget.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      const trail = trailRef.current;
-
-      trail.targetX = x;
-      trail.targetY = y;
-      trail.isInside = true;
-
-      for (let index = 0; index < TRAIL_COUNT; index += 1) {
-        trail.trailPoints[index] = { x, y };
-      }
-
-      if (!trail.animationId) {
-        trail.animationId = requestAnimationFrame(animate);
-      }
-    },
-    [animate, isTouchDevice],
-  );
-
-  const onMouseMove = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      if (isTouchDevice) {
-        return;
-      }
-
-      const rect = (containerRef.current ?? event.currentTarget).getBoundingClientRect();
-      trailRef.current.targetX = event.clientX - rect.left;
-      trailRef.current.targetY = event.clientY - rect.top;
-
-      if (!trailRef.current.animationId) {
-        trailRef.current.animationId = requestAnimationFrame(animate);
-      }
-    },
-    [animate, isTouchDevice],
-  );
-
-  const onMouseLeave = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      if (isTouchDevice) {
-        return;
-      }
-
-      const trail = trailRef.current;
-      trail.isInside = false;
-
-      const rect = event.currentTarget.getBoundingClientRect();
-      containerRef.current = null;
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      let targetX = x;
-      let targetY = y;
-
-      if (x <= 0) targetX = -400;
-      else if (x >= rect.width) targetX = rect.width + 400;
-      if (y <= 0) targetY = -400;
-      else if (y >= rect.height) targetY = rect.height + 400;
-
-      trail.targetX = targetX;
-      trail.targetY = targetY;
-
-      if (!trail.animationId) {
-        trail.animationId = requestAnimationFrame(animate);
-      }
-    },
-    [animate, isTouchDevice],
-  );
-
-  return { overlayRef, onMouseEnter, onMouseMove, onMouseLeave, isTouchDevice };
-}
 
 type PerspectiveHeroSectionProps = {
   animationLevel: AnimationLevel;
@@ -365,7 +100,7 @@ export function PerspectiveHeroSection({
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.65),rgba(245,245,243,0.92)_58%,rgba(237,237,234,1))]" />
 
       {!shouldReduceMotion && isHeroActive ? (
-        <DotGridCanvas pointer={pointer} scrollProgress={scrollProgress} />
+        <DotGridCanvas pointer={pointer} scrollProgress={scrollProgress} animationLevel={animationLevel} />
       ) : null}
 
       <motion.div
