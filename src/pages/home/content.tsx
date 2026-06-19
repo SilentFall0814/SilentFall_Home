@@ -47,7 +47,7 @@ export const OTHER_PAGES = [
         <path d="M8 8h8M8 12h5" strokeLinecap="round" />
       </svg>
     ),
-    href: "https://LJB666.xyz",
+    href: "http://blog.ljb666.xyz/",
   },
   {
     id: "bilibili",
