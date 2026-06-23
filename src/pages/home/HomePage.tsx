@@ -1,5 +1,6 @@
-﻿import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Navbar } from "../../components/layout/Navbar";
+import { Footer } from "../../components/layout/Footer";
 import { useHeroActivity } from "../../hooks/useHeroActivity";
 import { useParallaxPointer } from "../../hooks/useParallaxPointer";
 import { useSmoothScroll } from "../../hooks/useSmoothScroll";
@@ -7,10 +8,14 @@ import { useViewportProfile } from "../../hooks/useViewportProfile";
 import { getAnimationLevel } from "../../utils/performance";
 import { LiquidGlassDefs } from "./hero/LiquidGlassDefs";
 import { PerspectiveHeroSection } from "./hero/PerspectiveHeroSection";
-import { NAV_LINKS } from "./content";
+import { NAV_LINKS } from "../../config/site.config";
 import { AboutSection } from "./sections/AboutSection";
-import { ContactSection } from "./sections/ContactSection";
+import { NowSection } from "./sections/NowSection";
+import { SkillsSection } from "./sections/SkillsSection";
+import { ProjectsSection } from "./sections/ProjectsSection";
+import { UsesSection } from "./sections/UsesSection";
 import { OtherPagesSection } from "./sections/OtherPagesSection";
+import { ContactSection } from "./sections/ContactSection";
 
 export function HomePage() {
   const [copiedContact, setCopiedContact] = useState<string | null>(null);
@@ -108,7 +113,7 @@ export function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-mist text-ink">
+    <div className="relative min-h-screen overflow-x-hidden bg-paper text-ink">
       <LiquidGlassDefs />
       <Navbar links={NAV_LINKS} onNavigate={handleNavigate} />
 
@@ -119,13 +124,19 @@ export function HomePage() {
           springX={springX}
           springY={springY}
         />
-        <OtherPagesSection />
         <AboutSection />
+        <NowSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <UsesSection />
+        <OtherPagesSection />
         <ContactSection
           copiedValue={copiedContact}
           onCopy={handleCopyContact}
         />
       </main>
+
+      <Footer />
     </div>
   );
 }

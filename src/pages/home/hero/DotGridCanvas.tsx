@@ -96,9 +96,11 @@ export function DotGridCanvas({
         }
       }
 
+      // Claude 风格点阵：陶土橙暖色调，取代原冷灰色
       for (const [key, points] of buckets) {
         const alpha = key / alphaSteps;
-        context.fillStyle = `rgba(185,185,185,${alpha})`;
+        // 主点阵用陶土橙暖色，营造温暖的纸张质感
+        context.fillStyle = `rgba(217, 119, 87, ${alpha * 0.7})`;
         for (let index = 0; index < points.length; index += 1) {
           const [px, py, radius] = points[index];
           const diameter = radius * 2;

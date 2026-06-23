@@ -40,13 +40,15 @@ function LeoLetter({
   const letterRotate = useTransform(springX, (value) =>
     mapPointerRange(value, rotateRange),
   );
-  const letterShadow = useMotionTemplate`${letterX}px ${letterY}px 28px rgba(0, 0, 0, 0.08)`;
+  // Claude 风格：陶土橙柔和阴影，取代原冷黑阴影
+  const letterShadow = useMotionTemplate`${letterX}px ${letterY}px 28px rgba(217, 119, 87, 0.18)`;
 
   return (
     <motion.span
       className={
         className ??
-        "inline-block text-[clamp(3.3rem,9vw,8.1rem)] font-light italic tracking-[-0.08em] text-black"
+        // Claude 风格：衬线斜体 + 陶土橙，取代原无衬线黑色
+        "inline-block font-serif text-[clamp(3.3rem,9vw,8.1rem)] font-medium italic tracking-[-0.08em] text-clay"
       }
       variants={{
         initial: { opacity: 0, scale: 0.8, rotate: -11, y: 8 },
@@ -164,7 +166,7 @@ export function SignatureLetters({
           offsetY={letter.offsetY}
           rotateRange={letter.rotate}
           delay={letter.delay}
-          className="inline-block text-[clamp(2.5rem,15vw,5rem)] font-light italic tracking-[-0.05em] text-black sm:text-[clamp(2.2rem,5vw,5rem)]"
+          className="inline-block font-serif text-[clamp(2.5rem,15vw,5rem)] font-medium italic tracking-[-0.05em] text-clay sm:text-[clamp(2.2rem,5vw,5rem)]"
         />
       ))}
     </motion.span>
